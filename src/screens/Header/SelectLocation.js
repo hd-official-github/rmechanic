@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import axios from 'axios';
 import { CONSTANTS } from '../../constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Toast, { BaseToast } from 'react-native-toast-message';
+import Toast from 'react-native-toast-message';
 import Loader from '../../components/Loader';
 
 

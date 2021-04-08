@@ -7,6 +7,15 @@ import Appbar from '../../components/Appbar';
 export default function AddModel({ navigation, route }) {
     const { carid } = route.params;
 
+    async function sendCarInfo(car, model, image) {
+        const payload = {
+            car: car,
+            model: model,
+            image: image
+        }
+        navigation.push('AddRegNumber', payload);
+    }
+
     const carmodels = [
         { id: 'audi', car: 'Audi', model: 'A3', image: "https://rmechanic.herokuapp.com/assets/images/audi.jpg" },
         { id: 'audi', car: 'Audi', model: 'A3 Cabriolet', image: "https://rmechanic.herokuapp.com/assets/images/audi.jpg" },
@@ -428,7 +437,7 @@ export default function AddModel({ navigation, route }) {
                     carmodels.map((item, index) => {
                         if (item.id == carid)
                             return (
-                                <TouchableOpacity style={styles.card} key={index}>
+                                <TouchableOpacity style={styles.card} key={index} onPress={() => sendCarInfo(item.car, item.model, item.image)}>
                                     <Avatar.Image size={38} source={{ uri: item.image }} />
                                     <Text style={styles.label}>{item.model}</Text>
                                 </TouchableOpacity>

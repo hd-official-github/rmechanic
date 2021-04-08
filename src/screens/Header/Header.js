@@ -8,9 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default function Header({ navigation }) {
 
     function myVehicles() {
-        // Geolocation.getCurrentPosition((info) => {
-        //     openMap({ latitude: info.coords.latitude, longitude: info.coords.longitude });
-        // });
+
         navigation.navigate('Vehicles');
     }
 
