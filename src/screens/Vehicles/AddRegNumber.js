@@ -20,14 +20,19 @@ export default function AddRegNumber({ navigation, route }) {
         if (reg != '') {
             AsyncStorage.getItem('uuid', (err, result) => {
                 const data = {
-                    car: car,
-                    image: image,
-                    model: model,
-                    user_id: result
+                    "car": car,
+                    "image": image,
+                    "model": model,
+                    "user_id": result,
+                    "reg": reg
                 }
                 axios.post(CONSTANTS.BASE_URL + "/submitvehicle", JSON.stringify(data))
-                    .then(res => console.log('saved data ', res))
-                    .catch(err => console.log('error saving data'))
+                    .then(res => {
+                        if (res.data.ok) {
+                            navigation.popToTop();
+                        }
+                    })
+                    .catch(err => console.log('error saving data ', err))
             });
 
         } else {
