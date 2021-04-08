@@ -18,7 +18,6 @@ export default function AddRegNumber({ navigation, route }) {
     }, [])
     async function validateAndSubmit() {
         if (reg != '') {
-
             AsyncStorage.getItem('uuid', (err, result) => {
                 const data = {
                     car: car,
