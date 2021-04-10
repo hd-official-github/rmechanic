@@ -2,6 +2,7 @@ import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/
 import React from 'react'
 
 import SelectLocation from '../Header/SelectLocation';
+import Assessment from './Assessment';
 // import HeaderStack from '../Header/HeaderStack';
 import HomeScreen from './HomeScreen';
 import RatePage from './RatePage';
@@ -22,6 +23,7 @@ export default function HomeStack() {
             <Stack.Screen name="SelectLocation" component={SelectLocation} options={navoptsver} />
             <Stack.Screen name="ServiceDetails" component={ServiceDetails} options={navopts} />
             <Stack.Screen name="RatePage" component={RatePage} options={navopts} />
+            <Stack.Screen name="Assessment" component={Assessment} options={navopts} />
 
         </Stack.Navigator>
     );

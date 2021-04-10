@@ -22,6 +22,7 @@ export default function ServiceDetails({ navigation, route }) {
                 tabBarVisible: true
             });
     }, []);
+
     return (
         <View style={styles.container}>
             <View style={styles.upsection}>
@@ -103,7 +104,9 @@ export default function ServiceDetails({ navigation, route }) {
 
             </View >
             <View style={styles.bottombutton}>
-                <TouchableOpacity style={styles.book}><Text style={styles.text}>BOOK  AN  ASSESSMENT @ ₹ 99</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.book} onPress={() => navigation.push('Assessment', { serviceId: serviceId })}>
+                    <Text style={styles.text}>BOOK  AN  ASSESSMENT @ ₹ 99</Text>
+                </TouchableOpacity>
             </View>
         </View >
     );

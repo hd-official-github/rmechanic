@@ -56,8 +56,6 @@ export default function VehicleScreen({ navigation }) {
                     }
                 }
             ]);
-
-
     }
 
     useEffect(() => {
@@ -80,9 +78,9 @@ export default function VehicleScreen({ navigation }) {
                                                 <Text>{item.reg}</Text>
                                             </View>
                                         </View>
-
-                                        <TouchableOpacity onPress={() => deletecars(item.reg)}><Icon name="delete" size={25} /></TouchableOpacity>
-
+                                        <TouchableOpacity onPress={() => deletecars(item.reg)}>
+                                            <Icon name="delete" size={25} />
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                             );
