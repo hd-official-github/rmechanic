@@ -46,13 +46,13 @@ export default function SelectLocation({ navigation }) {
 
                 AsyncStorage.getItem('location', (err, result) => {
                     if (!err && result != null) {
-                        // console.log('exist', result);
+
                         if (locname !== result) {
                             AsyncStorage.setItem('location', locname);
                         }
                     }
                     else {
-                        // console.log('not exist', AsyncStorage.getItem('location'));
+
                         AsyncStorage.setItem('location', locname);
                     }
                 })
@@ -66,8 +66,6 @@ export default function SelectLocation({ navigation }) {
 
     async function getLocation(locname) {
         await requirement();
-        // Geolocation.getCurrentPosition(info => { Alert.alert("Location Details", "Lat " + info.coords.latitude + "Lng" + info.coords.longitude) },
-        //     (err) => { Alert.alert('Location Access Denied', "No acess was given for location") }, { enableHighAccuracy: true });
 
         Geolocation.getCurrentPosition(info => { sendLocToServer(info, locname) },
             (err) => { Alert.alert('Location Access Denied', JSON.stringify(err)) }, { enableHighAccuracy: false, maximumAge: 1000, timeout: 30000 });
@@ -90,13 +88,13 @@ export default function SelectLocation({ navigation }) {
                     <View style={{ flex: 1 }}>
                         <View style={styles.header}>
                             <View style={styles.label}><Text style={styles.text}>SELECT YOUR LOCATION</Text></View>
-                            <TouchableOpacity style={styles.button} onPress={() => Toaster('info', 'Pick your City', 'Choose any city to continue')}>
+                            {/* <TouchableOpacity style={styles.button} onPress={() => Toaster('info', 'Pick your City', 'Choose any city to continue')}>
                                 <Icon name="my-location" size={25} style={{ paddingRight: 5 }} />
                                 <Text style={styles.text}>USE CURRENT LOCATION</Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                         </View>
                         <View style={{ paddingVertical: 20, paddingHorizontal: 10, backgroundColor: '#fff', marginBottom: 5, alignItems: 'center' }}>
-                            <Text style={styles.text}>OR SELECT FROM CITIES WE SERVE</Text>
+                            <Text style={styles.text}>CITIES WE SERVE</Text>
                         </View>
                         <TouchableOpacity style={styles.item} onPress={() => getLocation("Bengaluru")}>
                             <Text style={styles.text}>Bengaluru</Text>
@@ -123,7 +121,7 @@ const styles = StyleSheet.create({
     label: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 10
+        // marginBottom: 10
     },
     text: {
         fontFamily: "ManropeBold",

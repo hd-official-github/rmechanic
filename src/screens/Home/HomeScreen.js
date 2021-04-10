@@ -16,26 +16,26 @@ import Loader from '../../components/Loader';
 
 
 
-const requirement = async () => {
-    try {
-        const g = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
-            title: "ACESS LOCATION PERMISSION",
-            message:
-                "RMechanic needs your location " +
-                "to find the nearest garage to you",
-            buttonNeutral: "Ask Me Later",
-            buttonNegative: "Cancel",
-            buttonPositive: "OK"
-        });
-        if (PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)) {
-            console.log("You can use the ACCESS_FINE_LOCATION");
-        } else {
-            alert('not');
-        }
-    } catch (err) {
-        console.log('errr while gettign loc ', err);
-    }
-}
+// const requirement = async () => {
+//     try {
+//         const g = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION, {
+//             title: "ACESS LOCATION PERMISSION",
+//             message:
+//                 "RMechanic needs your location " +
+//                 "to find the nearest garage to you",
+//             buttonNeutral: "Ask Me Later",
+//             buttonNegative: "Cancel",
+//             buttonPositive: "OK"
+//         });
+//         if (PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)) {
+//             console.log("You can use the ACCESS_FINE_LOCATION");
+//         } else {
+//             alert('not');
+//         }
+//     } catch (err) {
+//         console.log('errr while gettign loc ', err);
+//     }
+// }
 export default function HomeScreen({ navigation }) {
 
     const [datas, setDatas] = useState([]);
@@ -43,14 +43,20 @@ export default function HomeScreen({ navigation }) {
 
 
     const gotodetails = (serviceId) => {
-        // console.log(serviceId);
-        navigation.push('ServiceDetails', { serviceId: serviceId });
+
+        AsyncStorage.getItem('location', (err, res) => {
+            if (res == null) {
+                navigation.push('SelectLocation');
+            } else {
+                navigation.push('ServiceDetails', { serviceId: serviceId });
+            }
+        });
+
     }
     const getservices = () => {
         axios.get(CONSTANTS.BASE_URL + "/getservices").then((data) => { setDatas(data.data.services); setLoading(false) }).catch((e) => Alert.alert("Err"));
     }
     useEffect(() => {
-
         getservices();
     }, []);
     return (
