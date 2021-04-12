@@ -18,7 +18,7 @@ export default function Assessment({ navigation, route }) {
                             <Text style={styles.heading}>Assessment Details</Text>
                         </View>
 
-                        <Text>Get an expert mechanic reach to your doorsteps and assess your car problems. Our team will then finalize your service and give you best estimates across all India </Text>
+                        <Text style={styles.bottomtext}>Get an expert mechanic reach to your doorsteps and assess your car problems. Our team will then finalize your service and give you best estimates across all India </Text>
                     </View>
                     <View style={styles.steps}>
                         <View style={styles.stepitem}>
@@ -44,17 +44,17 @@ export default function Assessment({ navigation, route }) {
                             <Text style={styles.heading}>Service Booking Details</Text>
                         </View>
                         <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text>Denting and Painting</Text>
-                            <Text>₹ 99.0</Text>
+                            <Text style={styles.bottomtext}>Denting and Painting</Text>
+                            <Text style={styles.bottomtext}>₹ 99.0</Text>
                         </View>
                         <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text>Taxes and GST</Text>
-                            <Text>₹ 0.0</Text>
+                            <Text style={styles.bottomtext}>Taxes and GST</Text>
+                            <Text style={styles.bottomtext}>₹ 0.0</Text>
                         </View>
                         <Text>--------------------------------------------</Text>
                         <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'space-between', marginTop: 30 }}>
-                            <Text style={{ fontWeight: 'bold' }}>GRAND TOTAL</Text>
-                            <Text style={{ fontWeight: 'bold' }}>₹ 99.0</Text>
+                            <Text style={styles.bottomtext}>GRAND TOTAL</Text>
+                            <Text style={styles.bottomtext}>₹ 99.0</Text>
                         </View>
                     </View>
                 </ScrollView>

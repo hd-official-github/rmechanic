@@ -50,6 +50,7 @@ export default function AppNav() {
                     },
                 })}
                 tabBarOptions={{
+                    fontFamily: 'ManropeBold',
                     activeBackgroundColor: '#FFDC3D',
                     activeTintColor: '#3e2465',
                     inactiveTintColor: 'gray',
@@ -65,6 +66,7 @@ export default function AppNav() {
                 <Tab.Screen name="Orders" component={OrderStack} />
                 <Tab.Screen name="Vehicles" component={VehicleStack} />
                 <Tab.Screen name="Account" component={AccountStack} options={{
+
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="account-circle" size={25} color={color} options={() => ({
                             tabBarIcon: ({ color, focused, size }) => (

@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Avatar } from 'react-native-paper';
-import { Item } from 'react-native-paper/lib/typescript/components/List/List';
+
 import Icon from 'react-native-vector-icons/Ionicons';
 import { CONSTANTS } from '../../constants';
 // import Icon from 'react-native-vector-icons/AntDesign';
@@ -16,9 +16,8 @@ export default function Header({ navigation }) {
         navigation.navigate('Vehicles');
     }
 
-
     const [location, setlocation] = useState("PICK A CITY");
-    const [car, setcarname] = useState("PICK A CITY");
+    const [car, setcarname] = useState("Select Vehicle");
     const [carimage, setcarimage] = useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnqYGSi3lhN98UCZaVjmRw8qLN-GB2maSXOQ&usqp=CAU");
 
     setInterval(() => {
@@ -76,7 +75,7 @@ const styles = StyleSheet.create({
     car: { flex: 1, justifyContent: 'center', alignItems: 'center' },
     location: { flex: 3, alignItems: 'center', flexDirection: 'row' },
     headertext: {
-        fontFamily: 'ManropeMedium',
+        fontFamily: 'ManropeBold',
         paddingHorizontal: 15,
         paddingEnd: 20
     }

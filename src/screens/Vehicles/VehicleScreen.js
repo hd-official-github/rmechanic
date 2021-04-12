@@ -75,7 +75,7 @@ export default function VehicleScreen({ navigation }) {
                                             <Avatar.Image size={38} source={{ uri: item.image }} />
                                             <View style={{ paddingHorizontal: 20 }}>
                                                 <Text style={{ fontFamily: 'ManropeBold', fontSize: 14 }}>{item.car} {item.model}</Text>
-                                                <Text>{item.reg}</Text>
+                                                <Text style={{ fontFamily: "ManropeMedium" }}>{item.reg}</Text>
                                             </View>
                                         </View>
                                         <TouchableOpacity onPress={() => deletecars(item.reg)}>
@@ -92,11 +92,11 @@ export default function VehicleScreen({ navigation }) {
             <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginHorizontal: 10 }}>
                 <TouchableOpacity style={styles.refresh} onPress={() => getcars()}>
                     <MaterialCommunityIcons name="refresh" size={25} />
-                    <Text style={{ paddingHorizontal: 20 }}>Refresh Vehicle List</Text>
+                    <Text style={{ paddingHorizontal: 20, fontFamily: "ManropeMedium" }}>Refresh Vehicle List</Text>
                 </TouchableOpacity>
             </View>
             <TouchableOpacity style={{ paddingVertical: 20, alignItems: 'center', justifyContent: 'center', backgroundColor: '#000', marginVertical: 15, marginHorizontal: 20 }} onPress={() => navigation.push('AddVehicle')}>
-                <Text style={{ color: "#fff", fontWeight: 'bold', fontFamily: 'ManropeBold', letterSpacing: 6 }}>ADD A VEHICLE</Text>
+                <Text style={{ color: "#fff", fontWeight: 'bold', fontFamily: 'ManropeBold', letterSpacing: 6, fontFamily: "ManropeMedium" }}>ADD A VEHICLE</Text>
             </TouchableOpacity>
 
         </View>
