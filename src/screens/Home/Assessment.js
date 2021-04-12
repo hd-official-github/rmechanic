@@ -4,9 +4,37 @@ import { TouchableOpacity } from 'react-native';
 import { View, Text, SafeAreaView, ScrollView } from 'react-native'
 import { Avatar } from 'react-native-paper';
 import Appbar from '../../components/Appbar';
+import Steps from '../../components/Steps';
+import RazorpayCheckout from 'react-native-razorpay';
+import { CONSTANTS } from '../../constants';
+
 
 export default function Assessment({ navigation, route }) {
     const { serviceId } = route.params;
+
+    function pay() {
+        var options = {
+            description: 'Service Booking Fee',
+            image: CONSTANTS.IMG_URL + "/assets/images/raz.png",
+            currency: 'INR',
+            key: 'rzp_test_jSNKjS7yPqWzZZ', // Your api key
+            amount: '5000', //in paisa
+            name: 'R Mechanic',
+            prefill: {
+                email: 'void@razorpay.com',
+                contact: '9191919191',
+                name: 'Razorpay Software'
+            },
+            theme: { color: '#FFDC3D' }
+        }
+        // RazorpayCheckout.open(options).then((data) => {
+        //     navigation.push('PaymentSuccess');
+        // }).catch((error) => {
+        //     navigation.push('PaymentFailed');
+        // });
+        navigation.push('PaymentSuccess');
+
+    }
     return (
         <View style={{ flex: 1 }}>
             <Appbar title="Book your service" navigation={navigation} />
@@ -20,24 +48,7 @@ export default function Assessment({ navigation, route }) {
 
                         <Text style={styles.bottomtext}>Get an expert mechanic reach to your doorsteps and assess your car problems. Our team will then finalize your service and give you best estimates across all India </Text>
                     </View>
-                    <View style={styles.steps}>
-                        <View style={styles.stepitem}>
-                            <Avatar.Image source={require('../../../assets/images/1.png')} size={30} />
-                            <Text style={styles.steptext}>Book</Text>
-                        </View>
-                        <View style={styles.stepitem}>
-                            <Avatar.Image source={require('../../../assets/images/2.png')} size={30} />
-                            <Text style={styles.steptext}>Assessment</Text>
-                        </View>
-                        <View style={styles.stepitem}>
-                            <Avatar.Image source={require('../../../assets/images/3.png')} size={30} />
-                            <Text style={styles.steptext}>Order</Text>
-                        </View>
-                        <View style={styles.stepitem}>
-                            <Avatar.Image source={require('../../../assets/images/4.png')} size={30} />
-                            <Text style={styles.steptext}>Service</Text>
-                        </View>
-                    </View>
+                    <Steps />
                     <View style={styles.card}>
                         <View style={styles.header}>
                             <Avatar.Image source={require('../../../assets/images/book.jpg')} size={35} />
@@ -65,7 +76,7 @@ export default function Assessment({ navigation, route }) {
                     <Text style={styles.bottomlabel}>Total</Text>
                     <Text style={styles.bottomtext}>₹ 99</Text>
                 </View>
-                <TouchableOpacity style={styles.buttonpay}>
+                <TouchableOpacity style={styles.buttonpay} onPress={() => pay()}>
                     <Text style={{ color: "#fff", fontFamily: "ManropeBold" }}>Proceed To Pay</Text>
                 </TouchableOpacity>
             </View>
@@ -83,33 +94,13 @@ const styles = StyleSheet.create({
         fontFamily: "ManropeBold",
         marginHorizontal: 10,
         fontSize: 16,
-        fontWeight: 'bold'
     },
     header: {
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 10
     },
-    steps: {
-        backgroundColor: "#fff",
-        padding: 5,
-        margin: 10,
-        borderRadius: 10,
-        flexDirection: 'row'
-    },
-    stepitem: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 10,
-        width: '25%'
-    },
-    steptext: {
-        fontFamily: 'ManropeMedium',
-        fontSize: 11,
-        textAlign: 'center',
-        marginTop: 10
-    },
+
     bottomlabel: {
         fontFamily: 'ManropeBold',
         fontSize: 22

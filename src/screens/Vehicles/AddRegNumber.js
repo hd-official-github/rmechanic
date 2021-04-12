@@ -29,7 +29,10 @@ export default function AddRegNumber({ navigation, route }) {
                 axios.post(CONSTANTS.BASE_URL + "/submitvehicle", JSON.stringify(data))
                     .then(res => {
                         if (res.data.ok) {
-                            navigation.popToTop();
+                            navigation.reset({
+                                index: 0,
+                                routes: [{ name: 'Home' }],
+                            });
                         }
                     })
                     .catch(err => console.log('error saving data ', err))

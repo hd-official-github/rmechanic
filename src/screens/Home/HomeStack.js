@@ -5,6 +5,8 @@ import SelectLocation from '../Header/SelectLocation';
 import Assessment from './Assessment';
 // import HeaderStack from '../Header/HeaderStack';
 import HomeScreen from './HomeScreen';
+import PaymentFailed from './PaymentFailed';
+import PaymentSuccess from './PaymentSuccess';
 import RatePage from './RatePage';
 import ServiceDetails from './ServiceDetails';
 const Stack = createStackNavigator();
@@ -24,6 +26,8 @@ export default function HomeStack() {
             <Stack.Screen name="ServiceDetails" component={ServiceDetails} options={navopts} />
             <Stack.Screen name="RatePage" component={RatePage} options={navopts} />
             <Stack.Screen name="Assessment" component={Assessment} options={navopts} />
+            <Stack.Screen name="PaymentSuccess" component={PaymentSuccess} options={navopts} />
+            <Stack.Screen name="PaymentFailed" component={PaymentFailed} options={navopts} />
 
         </Stack.Navigator>
     );

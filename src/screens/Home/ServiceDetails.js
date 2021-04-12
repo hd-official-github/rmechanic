@@ -55,7 +55,7 @@ export default function ServiceDetails({ navigation, route }) {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.rates} onPress={() => navigation.navigate('RatePage')}>
+                        <TouchableOpacity style={styles.rates} onPress={() => navigation.push('RatePage', { serviceId: serviceId })}>
                             <Image resizeMode="cover" source={require('../../../assets/images/rates.png')} style={{ width: 35, height: 35, backgroundColor: '#C7E3E5', borderRadius: 20 }} />
                             <Text style={{ fontFamily: 'ManropeBold', fontSize: 16, paddingHorizontal: 20 }}>See Denting and Painting Rates</Text>
                             <Icon name='arrow-forward-outline' size={20} style={{}} />

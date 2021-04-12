@@ -6,10 +6,10 @@ import { Collapse, CollapseHeader, CollapseBody } from 'accordion-collapse-react
 import { ScrollView } from 'react-native';
 
 
-export default function RatePage({ navigation }) {
+export default function RatePage({ navigation, route }) {
+    const { serviceId } = route.params;
     const [icon, seticon] = useState("angle-up");
     return (
-
         <View style={{ flex: 1 }}>
             <View style={{ flex: 8 }}>
                 <Appbar navigation={navigation} title="Rate Chart" />
@@ -95,7 +95,9 @@ export default function RatePage({ navigation }) {
                 </ScrollView>
             </View>
             <View style={styles.bottombutton}>
-                <TouchableOpacity style={styles.book}><Text style={styles.textb}>BOOK  AN  ASSESSMENT @ ₹ 99</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.book} onPress={() => navigation.push('Assessment', { serviceId: serviceId })}>
+                    <Text style={styles.textb}>BOOK  AN  ASSESSMENT @ ₹ 99</Text>
+                </TouchableOpacity>
             </View>
         </View>
 

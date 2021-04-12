@@ -21,6 +21,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CONSTANTS } from './constants';
 import Loader from './components/Loader';
+import Toast from 'react-native-toast-message';
 
 const Login = ({ navigation }) => {
     const [loggingIn, setloggingIn] = useState(false);
@@ -37,6 +38,16 @@ const Login = ({ navigation }) => {
             offlineAccess: true,
         });
     }, []);
+    function Toaster(type, text1, text2) {
+        Toast.show({
+            type: type,
+            text1: text1,
+            text2: JSON.stringify(text2),
+            position: 'bottom',
+            visibilityTime: 4000,
+            autoHide: true,
+        })
+    }
     signIn = async () => {
 
         await GoogleSignin.hasPlayServices();
@@ -78,7 +89,7 @@ const Login = ({ navigation }) => {
                 // console.log(response.data);
             })
             .catch(function (error) {
-                console.log(error);
+                Toaster('error', 'NO INTERNET', "Please check your internet connection and try again");
             });
 
     }
@@ -102,6 +113,7 @@ const Login = ({ navigation }) => {
                 <View style={styles.bottom}>
                     <GoogleSigninButton size={GoogleSigninButton.Size.Wide} color={GoogleSigninButton.Color.Light} onPress={signIn} style={{ backgroundColor: '#000', paddingVertical: 30 }} />
                 </View>
+                <Toast ref={(ref) => Toast.setRef(ref)} />
             </View >
     );
 }
