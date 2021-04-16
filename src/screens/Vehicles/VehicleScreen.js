@@ -11,11 +11,13 @@ import { CONSTANTS } from '../../constants'
 import Icon from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Alert } from 'react-native'
+import { RefreshControl } from 'react-native'
 
 export default function VehicleScreen({ navigation }) {
 
     var [cars, setcars] = useState([]);
     var [loaded, setloaded] = useState(false);
+    const [refresh, setrefresh] = useState(true);
 
     function getcars() {
         AsyncStorage.getItem('uuid', (err, res) => {
@@ -24,6 +26,7 @@ export default function VehicleScreen({ navigation }) {
                 cars = res.data.cars;
                 setcars(cars = res.data.cars);
                 setloaded(true);
+                setrefresh(false);
             }).catch(err => {
                 console.log('err ', err);
             });
@@ -48,7 +51,11 @@ export default function VehicleScreen({ navigation }) {
                         axios.post(CONSTANTS.BASE_URL + "/deletevehicle", { 'reg': reg }, { headers: { "Content-Type": "application/json" } })
                             .then(res => {
                                 console.log("LOG DEL DATA ", res.data);
-                                getcars()
+                                if (res.data) {
+                                    navigation.reset({
+                                        routes: [{ name: 'Home' }],
+                                    });
+                                }
                             }).catch(err => {
                                 console.log(err);
                                 getcars()
@@ -65,7 +72,15 @@ export default function VehicleScreen({ navigation }) {
         <View style={{ flex: 1 }}>
             <Appbar title="MY VEHICLES" navigation={navigation} />
             {
-                loaded ? <ScrollView scrollEventThrottle={16}>
+                loaded ? <ScrollView scrollEventThrottle={16}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refresh}
+                            onRefresh={getcars()}
+                        />
+                    }
+
+                >
                     {
                         cars.map((item, index) => {
                             return (
@@ -99,7 +114,7 @@ export default function VehicleScreen({ navigation }) {
                 <Text style={{ color: "#fff", fontWeight: 'bold', fontFamily: 'ManropeBold', letterSpacing: 6, fontFamily: "ManropeMedium" }}>ADD A VEHICLE</Text>
             </TouchableOpacity>
 
-        </View>
+        </View >
     )
 }
 const styles = StyleSheet.create({

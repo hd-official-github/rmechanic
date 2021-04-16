@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { StyleSheet } from 'react-native'
 // import { NavigationActions } from 'react-navigation';
@@ -9,9 +9,18 @@ import { View, Text, SafeAreaView, Image } from 'react-native'
 
 
 export default function PaymentSuccess({ navigation }) {
+    useEffect(() => {
+        const parent = navigation.dangerouslyGetParent();
+        parent.setOptions({
+            tabBarVisible: false
+        });
+        return () =>
+            parent.setOptions({
+                tabBarVisible: true
+            });
+    }, []);
     function navigate() {
         navigation.reset({
-            index: 0,
             routes: [{ name: 'Orders' }],
         });
 

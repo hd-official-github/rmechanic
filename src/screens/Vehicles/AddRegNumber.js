@@ -30,7 +30,7 @@ export default function AddRegNumber({ navigation, route }) {
                     .then(res => {
                         if (res.data.ok) {
                             navigation.reset({
-                                index: 0,
+
                                 routes: [{ name: 'Home' }],
                             });
                         }
