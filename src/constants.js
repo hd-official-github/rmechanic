@@ -4,5 +4,6 @@ export const CONSTANTS = {
     FONT_BOLD: 'ManropeBold',
     FONT_SEMIBOLD: 'ManropeSemiBold',
     FONT_MEDIUM: 'ManropeMedium',
-    FONT_LIGHT: 'ManropeLight'
+    FONT_LIGHT: 'ManropeLight',
+    RAZ_KEY: "rzp_test_jSNKjS7yPqWzZZ"
 }

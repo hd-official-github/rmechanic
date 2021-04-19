@@ -10,6 +10,7 @@ import Appbar from '../../components/Appbar'
 
 export default function OrderDetails({ navigation }) {
     useEffect(() => {
+        console.log('orderdetails');
         const parent = navigation.dangerouslyGetParent();
         parent.setOptions({
             tabBarVisible: false
@@ -37,6 +38,7 @@ export default function OrderDetails({ navigation }) {
                         <Text style={styles.subtext}>Audi A3</Text>
                     </View>
                 </View>
+                {/* ASSESSMENT COMPLETED */}
                 <View style={styles.card}>
                     <View style={styles.header}>
                         <Text style={styles.title}>Service Order</Text>
@@ -48,18 +50,19 @@ export default function OrderDetails({ navigation }) {
                             <Text style={{ fontFamily: "ManropeMedium" }}>11 Items</Text>
                             <Text style={{ fontFamily: "ManropeBold" }}>₹ 299.00</Text>
                         </View>
-                        <TouchableOpacity style={{ backgroundColor: "#000", borderRadius: 12 }}>
-                            <Text style={{ color: "#fff", padding: 15, fontFamily: "ManropeBold" }}>View Details</Text>
+                        <TouchableOpacity style={{ backgroundColor: "#000", borderRadius: 10 }} onPress={() => navigation.push('Orderlist')}>
+                            <Text style={{ color: "#fff", paddingHorizontal: 15, paddingVertical: 12, fontFamily: "ManropeBold" }}>View Details</Text>
                         </TouchableOpacity>
                     </View>
-
                 </View>
+
                 <View style={styles.card}>
                     <View style={styles.header}>
                         <Text style={styles.title}>Order Status</Text>
                         {/* <Text style={{ color: "#ffdc3d", marginTop: 10 }}>Processing</Text> */}
                         {/* <Text style={{ color: 'green', marginTop: 10, fontFamily: "ManropeBold" }}>Mechanic Assigned</Text> */}
-                        <Text style={{ color: 'green', marginTop: 10, fontFamily: "ManropeBold" }}>Waiting for Order Placement</Text>
+                        {/* <Text style={{ color: 'green', marginTop: 10, fontFamily: "ManropeBold" }}>Waiting for Order Placement</Text> */}
+                        <Text style={{ color: 'green', marginTop: 10, fontFamily: "ManropeBold" }}>Your vehicle is under Service</Text>
                     </View>
                     {/* PLACED */}
                     {/* <View style={styles.item}>
@@ -75,7 +78,8 @@ export default function OrderDetails({ navigation }) {
                         <View style={{ paddingLeft: 20, flex: 2 }}>
                             <Text style={{ fontFamily: "ManropeBold", marginBottom: 5 }}>Chris Morris</Text>
                             <Text style={{ fontFamily: "ManropeMedium" }}>5 Spring Motors</Text>
-                            <Text style={{ fontFamily: "ManropeMedium" }}>Arriving on Monday 14th at 20:30</Text>
+                            {/* <Text style={{ fontFamily: "ManropeMedium" }}>Arriving on Monday 14th at 20:30</Text> */}
+                            {/* <Text style={{ fontFamily: "ManropeBold", marginTop: 10, color: "blue" }}>Vehicle will be delivered by 12th June</Text> */}
                         </View>
                         <View style={{ flexDirection: 'column', flex: 2, paddingLeft: 10 }}>
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -90,20 +94,22 @@ export default function OrderDetails({ navigation }) {
 
                     </View>
                     <Text style={{ fontFamily: "ManropeBold", marginTop: 20 }}>OTP :  2423</Text>
-                    {/* ASSESSMENT PAYMENT */}
+
                 </View>
 
             </ScrollView>
             <View style={{ backgroundColor: "#fff", flexDirection: 'row', paddingVertical: 12 }}>
                 <View style={{ width: '50%', alignItems: 'center', justifyContent: 'center' }}>
-                    <TouchableOpacity style={{ backgroundColor: "#ccc", borderRadius: 12, paddingHorizontal: 15, paddingVertical: 8 }}>
+                    <TouchableOpacity style={{ backgroundColor: "#f3f3f3", borderRadius: 12, paddingHorizontal: 10, paddingVertical: 4, flexDirection: 'row', alignItems: 'center' }}>
+                        <Avatar.Image source={require('../../../assets/images/support.png')} size={42} />
                         <Text style={{ color: "#000", padding: 4, fontFamily: "ManropeBold" }}>Call HelpLine</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ width: '50%', justifyContent: 'center', alignItems: 'center' }}>
-                    <TouchableOpacity style={{ backgroundColor: "#000", borderRadius: 12, paddingHorizontal: 10, paddingVertical: 8 }}>
-                        <Text style={{ color: "#fff", padding: 10, fontFamily: "ManropeBold" }}>Place Order Now</Text>
-                    </TouchableOpacity>
+                    {/* <TouchableOpacity style={{ backgroundColor: "#000", borderRadius: 12, paddingHorizontal: 10, paddingVertical: 8 }}>
+                        <Text style={{ color: "#fff", padding: 4, fontFamily: "ManropeBold" }}>Place Order Now</Text>
+                    </TouchableOpacity> */}
+                    <Text style={{ color: "#000", padding: 4, fontFamily: "ManropeBold" }}>Delievery Expected on 21st June</Text>
                 </View>
             </View>
         </View >

@@ -1,6 +1,7 @@
 import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 import React from 'react'
 import OrderDetails from './OrderDetails';
+import Orderlist from './Orderlist';
 import OrderScreen from './OrderScreen';
 
 const navopts = () => ({
@@ -14,6 +15,7 @@ export default function OrderStack() {
         <Stack.Navigator initialRouteName="OrderScreen">
             <Stack.Screen name="OrderScreen" component={OrderScreen} options={navopts} />
             <Stack.Screen name="OrderDetails" component={OrderDetails} options={navopts} />
+            <Stack.Screen name="Orderlist" component={Orderlist} options={navopts} />
         </Stack.Navigator>
     )
 }

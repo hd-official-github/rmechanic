@@ -18,7 +18,7 @@ import { CommonActions } from '@react-navigation/routers';
 export default function Assessment({ navigation, route }) {
     const { serviceId } = route.params;
     const [car, setcar] = useState("");
-    const [user, setuser] = useState("");
+    const [user, setuser] = useState({});
     const [locname, setLocname] = useState("");
     const [lat, setLat] = useState("");
     const [lng, setLng] = useState("");
@@ -50,6 +50,17 @@ export default function Assessment({ navigation, route }) {
             setLocname(res.data.location.location);
         });
     }
+    async function getUser(user) {
+        await axios.post(CONSTANTS.BASE_URL + "/getUser", { uuid: user }).then((res) => {
+
+            // console.log(res.data);
+            setuser({
+                uuid: user,
+                user_email: res.data.user.user_email,
+                user_name: res.data.user.user_name,
+            });
+        });
+    }
     useEffect(() => {
 
         AsyncStorage.getItem('uuid', (err, result) => {
@@ -57,7 +68,7 @@ export default function Assessment({ navigation, route }) {
 
             getlocation(result);
             getcar(result);
-
+            getUser(result);
         });
 
     }, []);
@@ -65,40 +76,83 @@ export default function Assessment({ navigation, route }) {
         setModalVisible(!isModalVisible);
     }
     function pay() {
-        // console.log(lat, " LAt ", lng, " ", locname);
-        // console.log(car, " car");
+
         setModalVisible(false);
-        // var options = {
-        //     description: 'Service Booking Fee',
-        //     image: CONSTANTS.IMG_URL + "/assets/images/raz.png",
-        //     currency: 'INR',
-        //     key: 'rzp_test_jSNKjS7yPqWzZZ',
-        //     amount: '9900', //in paisa
-        //     name: 'R Mechanic',
-        //     prefill: {
-        //         email: 'void@razorpay.com',
-        //         contact: '9191919191',
-        //         name: 'Razorpay Software'
-        //     },
-        //     theme: { color: '#FFDC3D' }
-        // }
-        // RazorpayCheckout.open(options).then((data) => {
+        // console.log("service id ", serviceId);
+        // console.log("USER ", user.user_email, " ", user.user_name);
+        // console.log("phone ", phone);
+        // console.log("address ", address);
+        // console.log("car ", car);
+        // console.log("LOC ", lat, " ", lng, " ", locname);
+        var payload = {
+            "service_id": serviceId,
+            "uuid": user.uuid,
+            "user_email": user.user_email,
+            "user_name": user.user_name,
+            "user_phone": phone,
+            "address": address,
+            "car_name": car,
+            "loc_lat": lat,
+            "loc_lng": lng,
+            "loc_name": locname,
+        }
+        var options = {
+            description: 'Service Booking Fee',
+            image: CONSTANTS.IMG_URL + "/assets/images/raz.png",
+            currency: 'INR',
+            key: CONSTANTS.RAZ_KEY,
+            amount: '9900', //in paisa
+            name: 'R Mechanic',
+            prefill: {
+                email: user.user_email,
+                contact: phone,
+                name: user.user_name
+            },
+            theme: { color: '#FFDC3D' }
+        }
+        RazorpayCheckout.open(options).then((data) => {
 
-        //     const payment_id = data.razorpay_payment_id;
+            const payment_id = data.razorpay_payment_id;
+            payload.payment_id = payment_id;
 
-        //     navigation.reset('PaymentSuccess');
-        // }).catch((error) => {
-        //     navigation.reset('PaymentFailed');
-        // });
 
-        navigation.dispatch(
-            CommonActions.reset({
-                index: 1,
-                routes: [
-                    { name: 'PaymentSuccess' }
-                ],
-            })
-        );
+            // console.log(payload);
+
+            axios.post(CONSTANTS.BASE_URL + "/submit_order", payload).then((res) => {
+                // console.log(res.data);
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 1,
+                        routes: [
+                            { name: 'PaymentSuccess' }
+                        ],
+                    })
+                );
+            }).catch((err => {
+                navigation.dispatch(
+                    CommonActions.reset({
+                        index: 1,
+                        routes: [
+                            { name: 'PaymentFailed' }
+                        ],
+                    })
+                );
+            }));
+
+        }).catch((error) => {
+
+            navigation.dispatch(
+                CommonActions.reset({
+                    index: 1,
+                    routes: [
+                        { name: 'PaymentFailed' }
+                    ],
+                })
+            );
+
+        });
+
+
 
         // navigation.push('PaymentFailed');
 
@@ -164,7 +218,7 @@ export default function Assessment({ navigation, route }) {
                             value={phone}
                             onChangeText={(text) => {
                                 onChangephone(text);
-                                console.log(text);
+                                // console.log(text);
                             }}
                             textContainerStyle={{ backgroundColor: "#fff", height: 70, color: "#000", }}
                             containerStyle={{ margin: 0, paddingHorizontal: 0 }}
