@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, Text, StyleSheet } from 'react-native'
@@ -9,12 +9,16 @@ import { CONSTANTS } from '../../../constants';
 export default function Orderitem({ navigation, res }) {
     // console.log("RES  ", res.billing_id);
 
+    useEffect(() => {
+
+    }, [])
+
     return (
-        <TouchableOpacity style={{ marginBottom: 10 }} onPress={() => navigation.push('OrderDetails')}>
+        <TouchableOpacity style={{ marginBottom: 10 }} onPress={() => navigation.push('OrderDetails', { billing_id: res.billing_id })}>
             <View style={styles.card}>
                 <View style={styles.left}>
                     <Text style={styles.title}>Booking id #{res.billing_id}</Text>
-
+                    <GetStatus res={res.order_status} />
 
                 </View>
                 <View style={styles.right}>
@@ -34,6 +38,19 @@ export default function Orderitem({ navigation, res }) {
             </View>
         </TouchableOpacity>
     )
+}
+export function GetStatus(res) {
+    switch (res.res) {
+        case "1": return <OrderProgress />
+            break;
+        case "2": return <OrderAsessment />
+            break;
+        case "3": return <OrderServicing />
+            break;
+        case "4": return <OrderFailed />
+            break;
+        default: return <OrderProgress />
+    }
 }
 export function OrderProgress() {
     return (
@@ -56,6 +73,14 @@ export function OrderAsessment() {
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Avatar.Image source={require('../../../../assets/images/caution.png')} size={24} />
             <Text style={{ fontFamily: "ManropeBold", }}>Ongoing Assessment</Text>
+        </View>
+    );
+}
+export function OrderServicing() {
+    return (
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Icon name="delete" size={25} />
+            <Text style={{ fontFamily: "ManropeBold", }}>Servicing</Text>
         </View>
     );
 }

@@ -37,9 +37,9 @@ export default function OrderScreen({ navigation }) {
                         <Text style={styles.heading}>Ongoing Orders</Text>
                         {
 
-                            orders.map((res) => {
+                            orders.map((res, index) => {
                                 // console.log("RES ", res)
-                                return <Orderitem navigation={navigation} res={res} />
+                                return <Orderitem navigation={navigation} res={res} key={index} />
                             })
                         }
 
