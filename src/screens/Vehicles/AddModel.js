@@ -430,7 +430,7 @@ export default function AddModel({ navigation, route }) {
 
     return (
         <View style={{ flex: 1 }}>
-            <Appbar title="SELECT MODEL" navigation={navigation} />
+            <Appbar title="SELECT MODEL" navigation={navigation} back={true} />
             <ScrollView scrollEventThrottle={16} style={{ flex: 1 }}>
                 <Text style={{ fontFamily: "ManropeBold", fontSize: 18, padding: 10 }}>Select brand</Text>
                 {

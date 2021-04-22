@@ -47,7 +47,7 @@ export default function Orderlist({ navigation }) {
     }
     return (
         <View>
-            <Appbar title="Order List" navigation={navigation} />
+            <Appbar title="Order List" navigation={navigation} back={true} />
             <ScrollView scrollEventThrottle={16}>
                 <View style={styles.card}>
                     <View style={styles.row}>

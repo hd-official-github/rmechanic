@@ -57,10 +57,13 @@ export default function HomeScreen({ navigation }) {
         axios.get(CONSTANTS.BASE_URL + "/getservices").then((data) => { setDatas(data.data.services); setLoading(false) }).catch((e) => Alert.alert("Err"));
     }
     useEffect(() => {
+
         getservices();
     }, []);
     return (
+
         < View style={{ flex: 1 }} >
+
             <Header navigation={navigation} />
             <ScrollView scrollEventThrottle={16} showsVerticalScrollIndicator={false} alwaysBounceVertical={true} >
                 <SwiperLayout />

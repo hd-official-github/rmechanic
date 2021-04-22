@@ -117,7 +117,7 @@ export default function AddVehicle({ navigation }) {
 
     return (
         <View style={{ flex: 1 }}>
-            <Appbar title="ADD YOUR VEHICLE" navigation={navigation} />
+            <Appbar title="ADD YOUR VEHICLE" navigation={navigation} back={true} />
             <ScrollView style={{ flex: 1, margin: 5 }}>
                 <Text style={{ fontFamily: "ManropeBold", fontSize: 18, padding: 10 }}>Select brand</Text>
                 <View style={styles.grid}>

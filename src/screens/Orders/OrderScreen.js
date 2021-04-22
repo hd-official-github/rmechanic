@@ -12,18 +12,28 @@ import OrderCompleted from './components/OrderCompleted';
 
 export default function OrderScreen({ navigation }) {
     const [orders, setOrders] = useState([]);
+    const [pevorders, setPrevOrders] = useState([]);
     const [loading, setLoading] = useState(true);
 
     async function getorders(res) {
         axios.post(CONSTANTS.BASE_URL + "/getorders", { uuid: res }).then((res) => {
+            console.log("ORD ", res.data.orders);
+            console.log("PREV ORD ", res.data.prev_orders);
             setOrders(res.data.orders);
+            setPrevOrders(res.data.prev_orders);
             setLoading(false);
         });
     }
+    // const timer = (res) => setInterval(() => {
+    //     console.log("TIMER");
+    //     getorders(res)
+    // }, 3000);
 
     useEffect(() => {
+
         AsyncStorage.getItem('uuid', (err, res) => {
             getorders(res);
+            // timer(res);
         });
 
     }, [])
@@ -37,19 +47,30 @@ export default function OrderScreen({ navigation }) {
                         <Text style={styles.heading}>Ongoing Orders</Text>
                         {
 
-                            orders.map((res, index) => {
+                            orders.length > 0 ? orders.map((res, index) => {
                                 // console.log("RES ", res)
                                 return <Orderitem navigation={navigation} res={res} key={index} />
-                            })
-                        }
+                            }) : NoOrders("NO ONGOING ORDERS")
 
+
+                        }
                         <Text style={styles.heading}>Previous Orders</Text>
-                        <OrderCompleted navigation={navigation} />
+                        {
+
+                            pevorders.length > 0 ? pevorders.map((res, index) => {
+                                return <OrderCompleted navigation={navigation} res={res} key={index} />
+                            }) : NoOrders("NO PREVIOUS ORDERS")
+                        }
                     </ScrollView>
             }
 
         </View >
     )
+}
+export function NoOrders(res) {
+    return <View style={{ backgroundColor: "#fff", marginHorizontal: 10, paddingVertical: 10 }}>
+        <Text style={{ color: "#000", fontFamily: "ManropeBold", textAlign: 'center' }}>{res}</Text>
+    </View>;
 }
 const styles = StyleSheet.create({
     heading: {

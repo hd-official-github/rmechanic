@@ -70,7 +70,7 @@ export default function VehicleScreen({ navigation }) {
     }, []);
     return (
         <View style={{ flex: 1 }}>
-            <Appbar title="MY VEHICLES" navigation={navigation} />
+            <Appbar title="MY VEHICLES" navigation={navigation} back={null} />
             {
                 loaded ? <ScrollView scrollEventThrottle={16}
                     refreshControl={

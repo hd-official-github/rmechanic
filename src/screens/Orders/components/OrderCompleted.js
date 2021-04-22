@@ -3,24 +3,25 @@ import { TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, Text, StyleSheet } from 'react-native'
 import { Avatar } from 'react-native-paper';
+import { CONSTANTS } from '../../../constants';
 
 
-export default function OrderCompleted({ navigation }) {
+export default function OrderCompleted({ navigation, res }) {
     return (
-        <TouchableOpacity style={{ marginBottom: 10 }} >
+        <TouchableOpacity style={{ marginBottom: 10 }} onPress={() => navigation.push('OrderDetails', { billing_id: res.billing_id })}>
             <View style={styles.card}>
                 <View style={styles.left}>
-                    <Text style={styles.title}>Booking id #1332211</Text>
+                    <Text style={styles.title}>Booking id #{res.billing_id}</Text>
                     <OrderComplete />
                 </View>
                 <View style={styles.right}>
                     <View style={styles.lv1}>
-                        <Avatar.Image source={require('../../../../assets/images/repair.png')} size={25} />
-                        <Text style={styles.textright}>Denting and Painting Services</Text>
+                        <Avatar.Image source={{ uri: CONSTANTS.IMG_URL + res.service_img }} size={25} />
+                        <Text style={styles.textright}>{res.service_name}</Text>
                     </View>
                     <View style={styles.lv2}>
-                        <Avatar.Image source={require('../../../../assets/images/audi.jpg')} size={25} />
-                        <Text style={styles.textright}>Audi A3</Text>
+                        <Avatar.Image source={{ uri: res.car_img }} size={25} />
+                        <Text style={styles.textright}>{res.car_name}</Text>
                     </View>
                 </View>
             </View>

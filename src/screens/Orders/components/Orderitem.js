@@ -4,14 +4,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { View, Text, StyleSheet } from 'react-native'
 import { Avatar } from 'react-native-paper';
 import { CONSTANTS } from '../../../constants';
+import { OrderComplete } from "../components/OrderCompleted";
 
 
 export default function Orderitem({ navigation, res }) {
-    // console.log("RES  ", res.billing_id);
 
-    useEffect(() => {
-
-    }, [])
 
     return (
         <TouchableOpacity style={{ marginBottom: 10 }} onPress={() => navigation.push('OrderDetails', { billing_id: res.billing_id })}>
@@ -19,7 +16,6 @@ export default function Orderitem({ navigation, res }) {
                 <View style={styles.left}>
                     <Text style={styles.title}>Booking id #{res.billing_id}</Text>
                     <GetStatus res={res.order_status} />
-
                 </View>
                 <View style={styles.right}>
                     <View style={styles.lv1}>
@@ -43,11 +39,15 @@ export function GetStatus(res) {
     switch (res.res) {
         case "1": return <OrderProgress />
             break;
-        case "2": return <OrderAsessment />
+        case "2": return <OrderAssigned />
             break;
-        case "3": return <OrderServicing />
+        case "3": return <OrderAsessment />
             break;
-        case "4": return <OrderFailed />
+        case "4": return <OrderServicing />
+            break;
+        case "5": return <OrderComplete />
+            break;
+        case "6": return <OrderFailed />
             break;
         default: return <OrderProgress />
     }
@@ -68,6 +68,14 @@ export function OrderFailed() {
         </View>
     );
 }
+export function OrderAssigned() {
+    return (
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Avatar.Image source={require('../../../../assets/images/caution.png')} size={24} />
+            <Text style={{ fontFamily: "ManropeBold", }}>Mechanic Assigned</Text>
+        </View>
+    );
+}
 export function OrderAsessment() {
     return (
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -79,8 +87,8 @@ export function OrderAsessment() {
 export function OrderServicing() {
     return (
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Icon name="delete" size={25} />
-            <Text style={{ fontFamily: "ManropeBold", }}>Servicing</Text>
+            <Avatar.Image source={require('../../../../assets/images/servicing.png')} size={24} />
+            <Text style={{ fontFamily: "ManropeBold", paddingLeft: 10 }}>Servicing</Text>
         </View>
     );
 }

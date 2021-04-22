@@ -56,6 +56,7 @@ export default function AppNav({ navigation }) {
         <View style={{ flex: 1 }}>
             {
                 isRendered ? <Tab.Navigator
+
                     backBehavior='none'
                     initialRouteName={hascar ? 'Home' : 'Vehicles'}
                     screenOptions={({ route }) => ({

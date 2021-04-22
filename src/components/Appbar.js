@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
-export default function Appbar({ navigation, title }) {
+export default function Appbar({ navigation, title, back }) {
     // const navigation = useNavigation();
+
+    function onBackPressed() {
+
+        navigation.pop();
+    }
 
     return (
         <View style={styles.appbar}>
-            <TouchableOpacity style={styles.back} onPress={() => navigation.pop()} ><Icon name="arrow-back" size={28} color="#2F2E41" /></TouchableOpacity>
+
+            {
+                back != null ? <TouchableOpacity style={styles.back} onPress={() => onBackPressed()} ><Icon name="arrow-back" size={28} color="#2F2E41" /></TouchableOpacity> : null
+
+            }
             <Text style={{ fontFamily: 'ManropeBold' }}>{title}</Text>
         </View>
     )
