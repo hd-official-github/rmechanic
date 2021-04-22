@@ -17,8 +17,6 @@ export default function OrderScreen({ navigation }) {
 
     async function getorders(res) {
         axios.post(CONSTANTS.BASE_URL + "/getorders", { uuid: res }).then((res) => {
-            console.log("ORD ", res.data.orders);
-            console.log("PREV ORD ", res.data.prev_orders);
             setOrders(res.data.orders);
             setPrevOrders(res.data.prev_orders);
             setLoading(false);
